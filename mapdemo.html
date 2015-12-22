@@ -1,0 +1,17 @@
+<head>
+  <title>mapdemo</title>
+</head>
+
+<body>
+  {{> map}}
+</body>
+
+<template name="map">
+  <div class="map-container">
+    {{#unless geolocationError}}
+      {{> googleMap name="map" options=mapOptions}}
+    {{else}}
+      Geolocation failed: {{geolocationError}}
+    {{/unless}}
+  </div>
+</template>
