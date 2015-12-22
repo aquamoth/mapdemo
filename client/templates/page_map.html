@@ -1,8 +1,17 @@
 <template name="page_map">
 	<head>
 		<title>Routed page_map</title>
+<!--	    <link rel="stylesheet" href="/foundation-icons/foundation-icons.css" /> -->
+	    <link rel="stylesheet" href="/font-awesome-4.5.0/css/font-awesome.min.css" />
 	</head>
 	<body>
-	{{> map}}
+					
+		<div class="row">
+			<div class="small-12 columns">
+				{{> map}}
+			</div>
+		</div>	
+
+		{{> bottom_menu}}
 	</body>
 </template>
