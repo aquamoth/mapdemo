@@ -32,15 +32,15 @@ Template.map.onCreated(function(){
   GoogleMaps.ready('map', function(map){
     var marker;
 
-/*
     var latLng = Geolocation.latLng();
     if(latLng){
       var secondaryMarker = new google.maps.Marker({
-        position: new google.maps.LatLng(latLng.lat+0.1, latLng.lng),
-        map: map.instance
+        position: new google.maps.LatLng(latLng.lat+0.001, latLng.lng),
+        title: 'Static test',
+        //icon: '/images/beachflag.png',
+        map: map.instance,
       });
     }
-*/
 
     
     //Create and move the marker when latLng changes
