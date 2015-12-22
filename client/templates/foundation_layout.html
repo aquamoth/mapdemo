@@ -1,0 +1,14 @@
+<template name="foundation_layout">
+	<head>
+		<title>{ {title default="Map Demo"}}</title>
+	    <link rel="stylesheet" href="/font-awesome-4.5.0/css/font-awesome.min.css" />
+	</head>
+	<body>
+		<header><h1>{ {title}}</h1></header>			
+		<aside>{{> yield "aside"}}</aside>
+
+		{{> yield}}				
+
+		{{> bottom_menu}}
+	</body>
+</template>

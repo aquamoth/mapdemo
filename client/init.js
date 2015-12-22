@@ -8,12 +8,20 @@ Meteor.startup(function(){
   GoogleMaps.load();  
 });
 
+Template.bottom_menu.helpers({
+  currentRoute: function(){
+   return Router.current().route.getName();
+  },
+});
+  
 Template.map.helpers({
   geolocationError: function(){
     var error = Geolocation.error();
     return error && error.message;
   },
-  
+  currentRoute: function(){
+    return Router.current().route.getName();
+  },
   mapOptions: function(){
     var latLng = Geolocation.latLng();
     //Initialize the map once we have the latLng
