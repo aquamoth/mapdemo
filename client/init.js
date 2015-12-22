@@ -35,9 +35,9 @@ Template.map.onCreated(function(){
     var latLng = Geolocation.latLng();
     if(latLng){
       var secondaryMarker = new google.maps.Marker({
-        position: new google.maps.LatLng(latLng.lat+0.001, latLng.lng),
-        title: 'Static test',
-        //icon: '/images/beachflag.png',
+        position: new google.maps.LatLng(latLng.lat-0.005, latLng.lng-0.004),
+        title: 'Bredsands strand',
+        icon: '/images/beachflag.png',
         map: map.instance,
       });
     }
