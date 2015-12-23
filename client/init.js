@@ -1,8 +1,7 @@
-/* global Meteor, Template */
+/* global ParkingLotsCollection */
+/* global Meteor, Template, Mongo */
 /* global GoogleMaps, google */
 var MAP_ZOOM = 15;
-console.log('Zoom is ' + MAP_ZOOM);
-
 
 Meteor.startup(function(){
   GoogleMaps.load();  
@@ -13,6 +12,26 @@ Template.bottom_menu.helpers({
    return Router.current().route.getName();
   },
 });
+
+
+Template.body.helpers({
+  parkinglots: function(){
+    return ParkingLotsCollection.find({});
+  }
+});
+
+
+Template.page_map.onRendered(function(){
+	$(document).foundation();
+});
+
+Template.page_schedule.helpers({
+  currentPosition: function(){
+      var latLng = Geolocation.latLng();
+      return latLng;
+  }
+})
+
   
 Template.map.helpers({
   geolocationError: function(){
@@ -39,7 +58,28 @@ Template.map.onCreated(function(){
   
   GoogleMaps.ready('map', function(map){
     var marker;
+    console.log('Google map is ready');
 
+    var allParkinglots = ParkingLotsCollection.find({});
+    console.dir(allParkinglots);
+    console.log('Looping through parking lots');
+    allParkinglots.forEach(function(parkinglot){
+      //console.log(JSON.stringify(allParkinglots, null, 2));
+        console.dir(parkinglot);
+
+        var parkinglotMarker = new google.maps.Marker({
+          position: new google.maps.LatLng(parkinglot.lat, parkinglot.lng),
+          title: parkinglot.title,
+          icon: '/images/beachflag.png',
+          map: map.instance,
+        });
+
+        console.log('Added marker ');
+        console.dir(parkinglotMarker);
+
+    });
+
+/*
     var latLng = Geolocation.latLng();
     if(latLng){
       var secondaryMarker = new google.maps.Marker({
@@ -49,7 +89,7 @@ Template.map.onCreated(function(){
         map: map.instance,
       });
     }
-
+*/
     
     //Create and move the marker when latLng changes
     self.autorun(function(){
@@ -75,6 +115,4 @@ Template.map.onCreated(function(){
     });
     
   });
-  
-  
 });
