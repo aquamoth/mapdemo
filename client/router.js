@@ -2,8 +2,6 @@
 Router.configure({
 	layoutTemplate: 'foundation_layout' 
 });
-/*
-*/
 
 Router.route('/', function(){
 //	this.layout('foundation_layout');
