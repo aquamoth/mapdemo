@@ -54,4 +54,49 @@
 	right:0;
 	bottom:5.734375rem;
 	left:0;
+	
+	
+	
+	
+	.widget-mylocation-button:active .widget-mylocation-button-normal {
+		background-position: -54px 0;
+	}
+	.widget-mylocation-button:hover .widget-mylocation-button-normal {
+		background-position: -36px 0;
+	}
+	.highres .widget-mylocation-button .widget-mylocation-cookieless {
+		background-image: url(//maps.gstatic.com/tactile/mylocation/mylocation-sprite-cookieless-v2-2x.png);
+	}
+	.widget-mylocation-button .widget-mylocation-button-normal {
+		background-position: 0 0;
+	}
+	.widget-mylocation-button .widget-mylocation-cookieless {
+		background-image: url(//maps.gstatic.com/tactile/mylocation/mylocation-sprite-cookieless-v2-1x.png);
+		background-size: 180px 18px;
+	}
+	.widget-mylocation-button-icon-common {
+		display: block;
+		height: 18px;
+		left: 6px;
+		margin: 0;
+		padding: 0;
+		position: absolute;
+		top: 6px;
+		width: 18px;
+	}	
+	
+	.widget-mylocation-button {
+		background-color:#fff;
+		border: 2px solid #fff;
+		border-radius: 3px;
+		box-shadow: 0 2px 6px rgba(0,0,0,.3);
+		cursor: pointer;
+		margin-bottom:22px;
+		text-align: center;
+	}
+
+	.widget-mylocation-button .widget-mylocation-button-normal {
+		height:18px;
+		width:18px;
+	}
 }
