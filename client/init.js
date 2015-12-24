@@ -66,6 +66,7 @@ Template.map.onCreated(function(){
     console.log('Google map is ready');
     //console.dir(map);
 
+    var infoWindow = new google.maps.InfoWindow();
 
 
     map.instance.addListener('center_changed', function() {
@@ -97,12 +98,28 @@ Template.map.onCreated(function(){
           icon: '/images/beachflag.png',
           map: map.instance,
         });
+        
+        parkinglotMarker.addListener('click', function(){ 
+          console.log('Parkinglot marker clicked');
+          //showInfoWindowFor(parkinglot); 
+          var contentString = 
+              '<div id="content">'+
+                '<div id="siteNotice">'+'</div>'+
+                '<h1 id="firstHeading" class="firstHeading">' + parkinglot.title + '</h1>'+
+                '<div id="bodyContent">'+ 
+                  descriptionAsHtml(parkinglot.description) +
+                  '<p><a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">Read more</a></p>'+
+                '</div>'+
+              '</div>';
+          infoWindow.setContent(contentString);
+          infoWindow.open(map.instance, this);
+
+        });
     
-        console.log('Added marker ');
-        //console.dir(parkinglotMarker);
+        console.log('Added marker');
       });
     });
-
+    
 /*
     var latLng = Geolocation.latLng();
     if(latLng){
@@ -166,12 +183,19 @@ Template.map.onCreated(function(){
       }
     });
     
+  
+    function showInfoWindowFor(parkinglot){
+    }
+
   });
 
+  function descriptionAsHtml(description){
+    return description;//TODO: Convert to html here
+  }
 
 
-  
-  
+
+
   /**
   * The CenterControl adds a control to the map that recenters the map on the current position marker
   * @constructor
