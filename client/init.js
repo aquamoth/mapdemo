@@ -58,35 +58,50 @@ Template.map.helpers({
 
 Template.map.onCreated(function(){
   var self = this;
+  var marker;
+  var markerCircle;
+  var trackCurrentPositionOnMap = true;
   
   GoogleMaps.ready('map', function(map){
     console.log('Google map is ready');
+    //console.dir(map);
 
 
 
-  self.autorun(function(){
+    map.instance.addListener('center_changed', function() {
+      console.log('Center changed');
+      trackCurrentPositionOnMap=false;
+    });
+/*    
+    marker.addListener('click', function() {
+      map.setZoom(8);
+      map.setCenter(marker.getPosition());
+    });
+*/
+
+    self.autorun(function(){
       console.log('Looping through parking lots');
-
+  
       var knownParkinglots = Session["parkinglots"] || [];
       console.log('Known parkinglots');
       console.dir(knownParkinglots);
-    
+      
       var allParkinglots = ParkingLotsCollection.find({});
       console.dir(allParkinglots);
       allParkinglots.forEach(function(parkinglot){
-          console.dir(parkinglot);
+        console.dir(parkinglot);
   
-          var parkinglotMarker = new google.maps.Marker({
-            position: new google.maps.LatLng(parkinglot.lat, parkinglot.lng),
-            title: parkinglot.title,
-            icon: '/images/beachflag.png',
-            map: map.instance,
-          });
-  
-          console.log('Added marker ');
-          //console.dir(parkinglotMarker);
+        var parkinglotMarker = new google.maps.Marker({
+          position: new google.maps.LatLng(parkinglot.lat, parkinglot.lng),
+          title: parkinglot.title,
+          icon: '/images/beachflag.png',
+          map: map.instance,
+        });
+    
+        console.log('Added marker ');
+        //console.dir(parkinglotMarker);
       });
-  });
+    });
 
 /*
     var latLng = Geolocation.latLng();
@@ -101,8 +116,6 @@ Template.map.onCreated(function(){
 */
     
     //Create and move the marker when latLng changes
-    var marker;
-    var markerCircle;
     self.autorun(function(){
       var latLng = Geolocation.latLng();
       if(!latLng)
@@ -145,34 +158,39 @@ Template.map.onCreated(function(){
         //markerCircle.setPosition(latLng);
       }
       
-      //Center and zoom the map view onto the current position
-      map.instance.setCenter(marker.getPosition());
-      map.instance.setZoom(MAP_ZOOM);
+      
+      if(trackCurrentPositionOnMap){
+        //Center and zoom the map view onto the current position
+        map.instance.panTo(marker.getPosition());
+        map.instance.setZoom(MAP_ZOOM);
+      }
     });
     
   });
+
+
+
+  
+  
+  /**
+  * The CenterControl adds a control to the map that recenters the map on the current position marker
+  * @constructor
+  */
+  function CenterControl(controlDiv, map, marker) {
+    var controlUI = document.createElement('div');
+    controlUI.className = 'widget-mylocation-button';
+    controlUI.title = 'Click to recenter the map';
+    controlDiv.appendChild(controlUI);
+  
+    var controlIcon = document.createElement('div');
+    controlIcon.className='widget-mylocation-button-normal widget-mylocation-cookieless';
+    controlUI.appendChild(controlIcon);
+  
+    controlUI.addEventListener('click', function() {
+      map.setCenter(marker.getPosition());
+      map.setZoom(MAP_ZOOM);
+      console.log('Enabling tracking of current position');
+      trackCurrentPositionOnMap=true;
+    });
+  }
 });
-
-
-
-
-
-/**
- * The CenterControl adds a control to the map that recenters the map on the current position marker
- * @constructor
- */
-function CenterControl(controlDiv, map, marker) {
-  var controlUI = document.createElement('div');
-  controlUI.className = 'widget-mylocation-button';
-  controlUI.title = 'Click to recenter the map';
-  controlDiv.appendChild(controlUI);
-
-  var controlIcon = document.createElement('div');
-  controlIcon.className='widget-mylocation-button-normal widget-mylocation-cookieless';
-  controlUI.appendChild(controlIcon);
-
-  controlUI.addEventListener('click', function() {
-    map.setCenter(marker.getPosition());
-    map.setZoom(MAP_ZOOM);
-  });
-}
