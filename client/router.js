@@ -17,7 +17,4 @@ Router.route('/parkinglot/:_id', {
     } 
 });
 
-Router.route('/Schedule', function(){
-//	this.layout('foundation_layout');
-	this.render('page_schedule');
-}, { name: 'schedule'});
+Router.route('/Schedule', { name: 'schedule.show'});

@@ -26,14 +26,6 @@ Template.page_map.onRendered(function(){
 	$(document).foundation();
 });
 */
-
-Template.page_schedule.helpers({
-  currentPosition: function(){
-      var latLng = Geolocation.latLng();
-      return latLng;
-  }
-})
-
   
 Template.map.helpers({
   geolocationError: function(){
