@@ -101,6 +101,8 @@ Template.map.onCreated(function(){
         
         parkinglotMarker.addListener('click', function(){ 
           console.log('Parkinglot marker clicked');
+          var url = '/parkinglot/' + parkinglot._id;
+          console.log('Read more: ' + url);
           //showInfoWindowFor(parkinglot); 
           var contentString = 
               '<div id="content">'+
@@ -108,7 +110,7 @@ Template.map.onCreated(function(){
                 '<h1 id="firstHeading" class="firstHeading">' + parkinglot.title + '</h1>'+
                 '<div id="bodyContent">'+ 
                   descriptionAsHtml(parkinglot.description) +
-                  '<p><a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">Read more</a></p>'+
+                  '<p><a href="' + url +'">Read more</a></p>'+
                 '</div>'+
               '</div>';
           infoWindow.setContent(contentString);
