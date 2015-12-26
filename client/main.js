@@ -1,4 +1,4 @@
-/* global ParkingLotsCollection */
+/* global ParkingareasCollection */
 /* global Meteor, Session, Template, Mongo */
 /* global GoogleMaps, google */
 var MAP_ZOOM = 15;
@@ -15,8 +15,8 @@ Template.bottom_menu.helpers({
 
 /*
 Template.body.helpers({
-  parkinglots: function(){
-    return ParkingLotsCollection.find({});
+  parkingareas: function(){
+    return ParkingareasCollection.find({});
   }
 });
 */
@@ -75,13 +75,13 @@ Template.map.onCreated(function(){
     self.autorun(function(){
       console.log('Looping through parking lots');
   
-      var knownParkinglots = Session["parkinglots"] || [];
-      console.log('Known parkinglots');
-      console.dir(knownParkinglots);
+      var knownParkingareas = Session["parkingareas"] || [];
+      console.log('Known parkingareas');
+      console.dir(knownParkingareas);
       
-      var allParkinglots = ParkingLotsCollection.find({});
-      console.dir(allParkinglots);
-      allParkinglots.forEach(function(parkinglot){
+      var allParkingareas = ParkingareasCollection.find({});
+      console.dir(allParkingareas);
+      allParkingareas.forEach(function(parkinglot){
         console.dir(parkinglot);
   
         var parkinglotMarker = new google.maps.Marker({

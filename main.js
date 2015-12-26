@@ -1,2 +1,2 @@
-ParkingLotsCollection = new Mongo.Collection("parkinglots");
-console.log('Parkinglots collection initialized');
+ParkingareasCollection = new Mongo.Collection("parkingareas");
+console.log('Parkingareas collection initialized');

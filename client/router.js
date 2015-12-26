@@ -12,7 +12,7 @@ Router.route('/parkinglot/:_id', {
     data: function(){
         //console.log('loading data for parkinglot.show');
         var id = new Meteor.Collection.ObjectID(this.params._id);
-        var item = ParkingLotsCollection.findOne({ _id: id});
+        var item = ParkingareasCollection.findOne({ _id: id});
         return item;
     } 
 });
