@@ -5,7 +5,7 @@
 	{{> yield}}				
 	{{> bottom_menu}}
 {{else}}
-    {{> loginButtons}}
+    {{> youMustBeLoggedIn}}
 {{/if}}
 </template>
 
@@ -15,4 +15,19 @@
 {{#if currentUser}}
 	{{> bottom_menu}}
 {{/if}}
+</template>
+
+
+<template name="youMustBeLoggedIn">
+    <div class="row">
+        <div class="small-12 columns">
+            <h1>Oh no, a restricted page!</h1>
+            <p>This page is only intended for logged in users. 
+                Please sign in now with the button below, 
+                or go back to our home page and read more 
+                about HousePark and what we can do for you.</p>
+                
+            {{> loginButtons}}
+        </div>
+    </div>
 </template>
