@@ -1,8 +1,18 @@
 <template name="foundation_layout">
-	<header><h1>{ {title}}</h1></header>			
+{{#if currentUser}}
+ 	<header><h1>{ {title}}</h1></header>			
 	<aside>{{> yield "aside"}}</aside>
+	{{> yield}}				
+	{{> bottom_menu}}
+{{else}}
+    {{> loginButtons}}
+{{/if}}
+</template>
 
+<template name="foundation_layout_empty">
 	{{> yield}}				
 
+{{#if currentUser}}
 	{{> bottom_menu}}
+{{/if}}
 </template>

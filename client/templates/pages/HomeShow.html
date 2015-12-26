@@ -1,0 +1,22 @@
+<template name="HomeShow">
+    <div class="row">
+        <div class="small-12 columns">
+            <h1>Welcome to HousePark</h1>
+        </div>
+    </div>        
+    <div class="row">
+        <div class="small-12 columns">
+            <article>This is a short sales argument for the system.</article>
+        </div>
+    </div>        
+    <div class="row">
+        <div class="small-12 columns">
+            {{#if currentUser}}
+                <h3>Handle your account</h3>
+            {{else}}
+                <h3>Join now or log in with your existing account</h3>
+            {{/if}}
+            {{> loginButtons}}
+        </div>
+    </div>        
+</template>

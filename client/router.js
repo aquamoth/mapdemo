@@ -3,9 +3,9 @@ Router.configure({
 	layoutTemplate: 'foundation_layout' 
 });
 
-Router.route('/', function(){
-	this.render('page_map');
-}, { name: 'parking'});
+Router.route('/', { name: 'home.show', layoutTemplate: 'foundation_layout_empty' });
+
+Router.route('/parking', { name: 'parking.show'});
 
 Router.route('/parkinglot/:_id', {
     name: 'parkinglot.show', 
@@ -17,4 +17,4 @@ Router.route('/parkinglot/:_id', {
     } 
 });
 
-Router.route('/Schedule', { name: 'schedule.show'});
+Router.route('/schedule', { name: 'schedule.show'});

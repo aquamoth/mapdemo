@@ -22,3 +22,5 @@ dburles:google-maps
 mdg:geolocation
 iron:router
 zurb:foundation-sites
+accounts-ui
+accounts-password
