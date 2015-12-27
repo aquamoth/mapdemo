@@ -1,0 +1,3 @@
+
+## Access MongoDB on server
+"c:\Program Files\MongoDB\Server\3.2\bin\mongo.exe" -u client-fff8f69f -p b199b7d5-9619-87e7-f1ff-acd57d0e4c85 SG-mother1-6242.servers.mongodirector.com:27017/aquamoth-mapdemo_meteor_com
