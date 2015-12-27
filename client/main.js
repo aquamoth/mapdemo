@@ -174,6 +174,7 @@ Template.map.onCreated(function(){
         //Center and zoom the map view onto the current position
         map.instance.panTo(marker.getPosition());
         map.instance.setZoom(MAP_ZOOM);
+        trackCurrentPositionOnMap=true; //Reenforce tracking since the panTo() event just disabled it
       }
     });
     
