@@ -1,11 +1,10 @@
 /* global MapController */
-MapController = function(map)
-{
+MapController = function(map) {
     var trackCurrentPositionOnMap;
     var currentPositionMarker;
     var centerOfScreenCircle;
-
-
+    var infoWindow = new google.maps.InfoWindow();
+    var registeredParkingAreas = [];
 /*    
     currentPositionMarker.addListener('click', function() {
       map.setZoom(8);
@@ -74,6 +73,33 @@ MapController = function(map)
         trackCurrentPositionOnMap = true; //Reenforce tracking since the panTo() event just disabled it
       }
     }
+        
+    function descriptionAsHtml(description){
+        return description;//TODO: Convert to html here
+    }
+    
+    function onParkingAreaClicked(marker, parkingarea) { 
+        console.log('Parkingarea marker clicked');
+        var url = '/parkingarea/' + parkingarea._id;
+        console.log('Read more: ' + url);
+
+        var contentString = 
+            '<div id="content">'+
+                '<div id="siteNotice">'+'</div>'+
+                '<h1 id="firstHeading" class="firstHeading">' + parkingarea.title + '</h1>'+
+                '<div id="bodyContent">'+ 
+                descriptionAsHtml(parkingarea.description) +
+                '<p><a href="' + url +'">Read more</a></p>'+
+                '</div>'+
+            '</div>';
+
+        infoWindow.setContent(contentString);
+        infoWindow.open(map, marker);
+    }    
+    
+    
+    
+    
 
     MapController.prototype.setPosition = function(position){
       console.log('setPosition');
@@ -93,6 +119,28 @@ MapController = function(map)
       markerMovedTo(currentPositionMarker.getPosition());
     }
 
+    MapController.prototype.registerParkingAreas = function(parkingareas){
+		//
+        //registeredParkingAreas
+        //TODO: Remove all existing parkingareas
+		//
+        parkingareas.forEach(function(parkingarea){
+            console.dir(parkingarea);
+    		
+            var parkinglotMarker = new google.maps.Marker({
+                position: new google.maps.LatLng(parkingarea.lat, parkingarea.lng),
+                title: parkingarea.title,
+                icon: '/images/beachflag.png',
+                map: map,
+            });
+            
+            parkinglotMarker.addListener('click', function(){ onParkingAreaClicked(this, parkingarea); });
+            
+            console.log('Added parkingarea to map');
+            registeredParkingAreas.push(parkinglotMarker);
+            console.dir(parkinglotMarker);
+        });
+    }
 
   /**
   * The CenterControl adds a control to the map that recenters the map on the current position currentPositionMarker

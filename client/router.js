@@ -7,8 +7,8 @@ Router.route('/', { name: 'home.show', layoutTemplate: 'foundation_layout_empty'
 
 Router.route('/parking', { name: 'parking.show'});
 
-Router.route('/parkinglot/:_id', {
-    name: 'parkinglot.show', 
+Router.route('/parkingarea/:_id', {
+    name: 'parkingarea.show', 
     data: function(){
         //console.log('loading data for parkinglot.show');
         var id = new Meteor.Collection.ObjectID(this.params._id);

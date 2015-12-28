@@ -4,9 +4,6 @@ Template.map.helpers({
     var error = Geolocation.error();
     return error && error.message;
   },
-  currentRoute: function(){
-    return Router.current().route.getName();
-  },
   mapOptions: function(){
     var latLng = Geolocation.latLng();
     //Initialize the map once we have the latLng
@@ -28,47 +25,11 @@ Template.map.onCreated(function(){
   GoogleMaps.ready('map', function(map){
 
     var mapController = new MapController(map.instance);
-    var infoWindow = new google.maps.InfoWindow();
 
 
     self.autorun(function(){
-      var knownParkingareas = Session["parkingareas"] || [];
-      console.log('Known parkingareas');
-      console.dir(knownParkingareas);
-      
-      var allParkingareas = ParkingareasCollection.find({});
-      //console.dir(allParkingareas);
-      allParkingareas.forEach(function(parkinglot){
-      //  console.dir(parkinglot);
-  
-        var parkinglotMarker = new google.maps.Marker({
-          position: new google.maps.LatLng(parkinglot.lat, parkinglot.lng),
-          title: parkinglot.title,
-          icon: '/images/beachflag.png',
-          map: map.instance,
-        });
-        
-        parkinglotMarker.addListener('click', function(){ 
-          console.log('Parkinglot marker clicked');
-          var url = '/parkinglot/' + parkinglot._id;
-          console.log('Read more: ' + url);
-          //showInfoWindowFor(parkinglot); 
-          var contentString = 
-              '<div id="content">'+
-                '<div id="siteNotice">'+'</div>'+
-                '<h1 id="firstHeading" class="firstHeading">' + parkinglot.title + '</h1>'+
-                '<div id="bodyContent">'+ 
-                  descriptionAsHtml(parkinglot.description) +
-                  '<p><a href="' + url +'">Read more</a></p>'+
-                '</div>'+
-              '</div>';
-          infoWindow.setContent(contentString);
-          infoWindow.open(map.instance, this);
-
-        });
-    
-        console.log('Added parkinglot to map');
-      });
+      var parkingareas = ParkingareasCollection.find({}).fetch();
+      mapController.registerParkingAreas(parkingareas);
     });
     
 /*
@@ -93,12 +54,7 @@ Template.map.onCreated(function(){
     });
     
   
-    function showInfoWindowFor(parkinglot){
-    }
 
   });
 
-  function descriptionAsHtml(description){
-    return description;//TODO: Convert to html here
-  }
 });
