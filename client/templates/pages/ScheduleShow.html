@@ -26,11 +26,24 @@
             </label>
 		</div>
 	</div>	
+
+	{{#if timeslots}}
+	    {{#each timeslots}}
+	        {{> Timeslot}}
+	    {{/each}}
+
+		<div class="row">
+			<div class="small-12 columns">
+	            <button id="addTimeslotButton" class="success button">Add</button>
+			</div>
+		</div>	
+	{{/if}}
+
 	<div class="row">
 		<div class="small-12 columns">
 			<p>Lat: {{currentPosition.lat}}, Long: {{currentPosition.lng}}</p>
 		</div>
-	</div>	
+	</div>
 </template>
 
 <template name="ParkingLotOptions">
@@ -38,4 +51,12 @@
     {{#each parkinglots}}
         <option value="{{id}}" selected="{{selected}}">#{{id}} (x{{multi}})</option>
     {{/each}}
+</template>
+
+<template name="Timeslot">
+	<div class="row">
+		<div class="small-12 columns">
+            <p>This is one timeslot</p>
+		</div>
+	</div>	
 </template>

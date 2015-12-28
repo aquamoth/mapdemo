@@ -20,10 +20,19 @@ function onParkingAreaDropdownChange(e){
 }
 
 function onParkingLotDropdownChange(e){
-    var id = selectedValueOf(this);
-    console.log('Selected parking lot: ' + id);
+    var selectedParkingLot = selectedValueOf(this);
+    var selectedParkingArea = toObjectId(selectedValueOf(self.$('#ParkingAreaDropdown').get(0)));
+    displayScheduleFor(selectedParkingArea, selectedParkingLot);
 }
 
+
+function displayScheduleFor(selectedParkingArea, selectedParkingLot){
+
+    console.log('Display Schedule For');
+    console.log(selectedParkingArea);
+    console.log(selectedParkingLot);    
+    
+}
 
 function displayParkingLotOptionsFor(selectedParkingArea){
     var data = { parkinglots: parkinglotsFor(selectedParkingArea) };
