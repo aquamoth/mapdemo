@@ -2,7 +2,11 @@
 	<div class="row">
 		<div class="small-12 columns">
 			<h1>Scheduler page</h1>
-            
+            <p>Assign open hours for each parking lot</p>
+		</div>
+	</div>	
+	<div class="row">
+		<div class="small-6 columns">
             <label for="ParkingAreaDropdown">
                 <span>Select parking area</span>
                 <select id="ParkingAreaDropdown">
@@ -12,16 +16,19 @@
                     {{/each}}
                 </select>
             </label>
-            
+		</div>
+		<div class="small-6 columns">
             <label for="ParkingLotDropdown">
                 <span>Select parking lot</span>
                 <select id="ParkingLotDropdown">
                     {{> ParkingLotOptions}}
                 </select>
             </label>
-            
-			<p>Lat: {{currentPosition.lat}}</p>
-			<p>Long: {{currentPosition.lng}}</p>
+		</div>
+	</div>	
+	<div class="row">
+		<div class="small-12 columns">
+			<p>Lat: {{currentPosition.lat}}, Long: {{currentPosition.lng}}</p>
 		</div>
 	</div>	
 </template>
