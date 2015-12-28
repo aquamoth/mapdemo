@@ -2,8 +2,33 @@
 	<div class="row">
 		<div class="small-12 columns">
 			<h1>Scheduler page</h1>
+            
+            <label for="ParkingAreaDropdown">
+                <span>Select parking area</span>
+                <select id="ParkingAreaDropdown">
+                    <option></option>
+                    {{#each parkingareas}}
+                        <option value="{{_id}}">{{title}}</option>
+                    {{/each}}
+                </select>
+            </label>
+            
+            <label for="ParkingLotDropdown">
+                <span>Select parking lot</span>
+                <select id="ParkingLotDropdown">
+                    {{> ParkingLotOptions}}
+                </select>
+            </label>
+            
 			<p>Lat: {{currentPosition.lat}}</p>
 			<p>Long: {{currentPosition.lng}}</p>
 		</div>
 	</div>	
+</template>
+
+<template name="ParkingLotOptions">
+    <option></option>
+    {{#each parkinglots}}
+        <option value="{{id}}" selected="{{selected}}">#{{id}} (x{{multi}})</option>
+    {{/each}}
 </template>

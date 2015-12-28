@@ -17,4 +17,10 @@ Router.route('/parkingarea/:_id', {
     } 
 });
 
-Router.route('/schedule', { name: 'schedule.show'});
+Router.route('/schedule', { 
+    name: 'schedule.show',
+    data: function(){
+        var items = ParkingareasCollection.find({});
+        return { parkingareas: items };
+    }
+});
