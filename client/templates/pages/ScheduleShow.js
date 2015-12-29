@@ -22,16 +22,8 @@ function onParkingAreaDropdownChange(e){
 function onParkingLotDropdownChange(e){
     var selectedParkingLot = selectedValueOf(this);
     var selectedParkingArea = toObjectId(selectedValueOf(self.$('#ParkingAreaDropdown').get(0)));
-    displayScheduleFor(selectedParkingArea, selectedParkingLot);
-}
-
-
-function displayScheduleFor(selectedParkingArea, selectedParkingLot){
-
-    console.log('Display Schedule For');
-    console.log(selectedParkingArea);
-    console.log(selectedParkingLot);    
-    
+    var parkinglot = parkinglotsFor(selectedParkingArea).filter(function(lot){return lot.id == selectedParkingLot;})[0];
+    displayTimeslotsFor(parkinglot);
 }
 
 function displayParkingLotOptionsFor(selectedParkingArea){
@@ -47,6 +39,26 @@ function displayParkingLotOptionsFor(selectedParkingArea){
     if(data.parkinglots && data.parkinglots.length === 1){
         onParkingLotDropdownChange.call(parkingLotDropdown[0]);
     }
+    else{
+        clearTimeslotsSection();
+    }
+}
+
+function clearTimeslotsSection(){
+    var timeslotsSection = self.$('#TimeslotsSection');
+    timeslotsSection.empty();
+}
+
+function displayTimeslotsFor(parkinglot){
+
+    console.log('Display Schedule For');
+    console.log(parkinglot);
+    var data = parkinglot ? {isValid: true,  timeslots: parkinglot.timeslots} : {isValid: false};
+    console.log(data);
+    
+    var timeslotsSection = self.$('#TimeslotsSection');
+    timeslotsSection.empty();
+    UI.renderWithData(Template.TimeslotsSection, data, timeslotsSection[0]);
 }
 
 

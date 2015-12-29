@@ -27,17 +27,9 @@
 		</div>
 	</div>	
 
-	{{#if timeslots}}
-	    {{#each timeslots}}
-	        {{> Timeslot}}
-	    {{/each}}
-
-		<div class="row">
-			<div class="small-12 columns">
-	            <button id="addTimeslotButton" class="success button">Add</button>
-			</div>
-		</div>	
-	{{/if}}
+    <section id="TimeslotsSection">
+        {{> TimeslotsSection}}
+    </section>
 
 	<div class="row">
 		<div class="small-12 columns">
@@ -51,6 +43,20 @@
     {{#each parkinglots}}
         <option value="{{id}}" selected="{{selected}}">#{{id}} (x{{multi}})</option>
     {{/each}}
+</template>
+
+<template name="TimeslotsSection">
+    {{#if isValid}}
+        {{#each timeslots}}
+            {{> Timeslot}}
+        {{/each}}
+
+        <div class="row">
+            <div class="small-12 columns">
+                <button id="addTimeslotButton" class="success button">Add</button>
+            </div>
+        </div>	
+    {{/if}}
 </template>
 
 <template name="Timeslot">
