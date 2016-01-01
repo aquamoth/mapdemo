@@ -60,9 +60,18 @@
 </template>
 
 <template name="Timeslot">
-	<div class="row">
-		<div class="small-12 columns">
-            <p>This is one timeslot</p>
+	<div class="timeslot row" data-timeslot="{{id}}">
+		<div class="small-6 columns">
+            <label for="From">
+                <span>From:</span>
+                <input id="From" type="text" value="{{start}}"/>
+            </label>
+		</div>
+		<div class="small-6 columns">
+            <label for="To">
+                <span>To:</span>
+                <input id="To" type="text" value="{{end}}"/>
+            </label>
 		</div>
 	</div>	
 </template>
