@@ -9,7 +9,7 @@ Meteor.methods({
         
         ParkingareasCollection.update({
             _id: item._id,
-            'lots.id': item.lots.id
+            'lots.id': item.lots.id,
         }, {
             $set: { 'lots.$.from': item.lots.from }
         });

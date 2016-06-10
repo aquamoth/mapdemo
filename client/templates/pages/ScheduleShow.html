@@ -27,8 +27,8 @@
 		</div>
 	</div>	
 
-    <section id="TimeslotsSection">
-        {{> TimeslotsSection}}
+    <section id="ScheduleSection">
+        {{> ScheduleSection}}
     </section>
 
 	<div class="row">
@@ -38,6 +38,8 @@
 	</div>
 </template>
 
+
+
 <template name="ParkingLotOptions">
     <option></option>
     {{#each parkinglots}}
@@ -45,7 +47,9 @@
     {{/each}}
 </template>
 
-<template name="TimeslotsSection">
+
+
+<template name="ScheduleSection">
     {{#if isValid}}
         {{#each timeslots}}
             {{> Timeslot}}

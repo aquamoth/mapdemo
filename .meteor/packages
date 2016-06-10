@@ -24,3 +24,4 @@ iron:router
 zurb:foundation-sites
 accounts-ui
 accounts-password
+momentjs:moment
